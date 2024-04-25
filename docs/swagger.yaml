@@ -1,0 +1,248 @@
+basePath: /api/v1
+definitions:
+  Car:
+    properties:
+      mark:
+        example: Toyota
+        type: string
+      model:
+        example: Corolla
+        type: string
+      owner:
+        $ref: '#/definitions/Person'
+      regNum:
+        example: AA1234AA
+        type: string
+      year:
+        example: 2010
+        type: integer
+    type: object
+  CarResponse:
+    properties:
+      id:
+        type: string
+      mark:
+        example: Toyota
+        type: string
+      model:
+        example: Corolla
+        type: string
+      owner:
+        $ref: '#/definitions/PersonResponse'
+      regNum:
+        example: AA1234AA
+        type: string
+      year:
+        example: 2010
+        type: integer
+    type: object
+  Person:
+    properties:
+      name:
+        example: John
+        type: string
+      surname:
+        example: Doe
+        type: string
+    type: object
+  PersonResponse:
+    properties:
+      id:
+        type: string
+      name:
+        example: John
+        type: string
+      surname:
+        example: Doe
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  title: Car API
+  version: "1.0"
+paths:
+  /car:
+    get:
+      operationId: get-car-by-id
+      parameters:
+      - description: Car ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/CarResponse'
+        "400":
+          description: Bad request
+          schema:
+            type: string
+        "500":
+          description: Internal server error
+          schema:
+            type: string
+      summary: Get car by ID
+      tags:
+      - car
+  /car/delete:
+    delete:
+      operationId: delete-car
+      parameters:
+      - description: Car ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Car deleted
+          schema:
+            type: string
+        "400":
+          description: Bad request
+          schema:
+            type: string
+        "500":
+          description: Internal server error
+          schema:
+            type: string
+      summary: Delete car
+      tags:
+      - car
+  /car/info:
+    get:
+      operationId: get-cars-by-filter-with-pagination
+      parameters:
+      - description: Filter by
+        in: query
+        name: filter
+        type: string
+      - description: Search by
+        in: query
+        name: search
+        type: string
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/CarResponse'
+        "400":
+          description: Bad request
+          schema:
+            type: string
+        "500":
+          description: Internal server error
+          schema:
+            type: string
+      summary: Get cars by filter with pagination
+      tags:
+      - car
+  /car/insert:
+    post:
+      operationId: insert-car
+      parameters:
+      - description: Car object to be added
+        in: body
+        name: car
+        required: true
+        schema:
+          $ref: '#/definitions/Car'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/CarResponse'
+        "400":
+          description: Bad request
+          schema:
+            type: string
+        "500":
+          description: Internal server error
+          schema:
+            type: string
+      summary: Insert new car
+      tags:
+      - car
+  /car/owner:
+    get:
+      operationId: get-cars-by-owner
+      parameters:
+      - description: Owner ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/CarResponse'
+        "400":
+          description: Bad request
+          schema:
+            type: string
+        "500":
+          description: Internal server error
+          schema:
+            type: string
+      summary: Get cars by owner
+      tags:
+      - car
+  /car/update:
+    put:
+      operationId: update-car
+      parameters:
+      - description: Car object to be updated
+        in: body
+        name: car
+        required: true
+        schema:
+          $ref: '#/definitions/Car'
+      - description: Car ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/CarResponse'
+        "400":
+          description: Bad request
+          schema:
+            type: string
+        "500":
+          description: Internal server error
+          schema:
+            type: string
+      summary: Update car info
+      tags:
+      - car
+swagger: "2.0"

@@ -1,0 +1,372 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Car API",
+        "contact": {},
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api/v1",
+    "paths": {
+        "/car": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "car"
+                ],
+                "summary": "Get car by ID",
+                "operationId": "get-car-by-id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Car ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CarResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/car/delete": {
+            "delete": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "car"
+                ],
+                "summary": "Delete car",
+                "operationId": "delete-car",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Car ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Car deleted",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/car/info": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "car"
+                ],
+                "summary": "Get cars by filter with pagination",
+                "operationId": "get-cars-by-filter-with-pagination",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filter by",
+                        "name": "filter",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Search by",
+                        "name": "search",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Offset",
+                        "name": "offset",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CarResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/car/insert": {
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "car"
+                ],
+                "summary": "Insert new car",
+                "operationId": "insert-car",
+                "parameters": [
+                    {
+                        "description": "Car object to be added",
+                        "name": "car",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Car"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CarResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/car/owner": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "car"
+                ],
+                "summary": "Get cars by owner",
+                "operationId": "get-cars-by-owner",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Owner ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CarResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/car/update": {
+            "put": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "car"
+                ],
+                "summary": "Update car info",
+                "operationId": "update-car",
+                "parameters": [
+                    {
+                        "description": "Car object to be updated",
+                        "name": "car",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Car"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Car ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CarResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Car": {
+            "type": "object",
+            "properties": {
+                "mark": {
+                    "type": "string",
+                    "example": "Toyota"
+                },
+                "model": {
+                    "type": "string",
+                    "example": "Corolla"
+                },
+                "owner": {
+                    "$ref": "#/definitions/Person"
+                },
+                "regNum": {
+                    "type": "string",
+                    "example": "AA1234AA"
+                },
+                "year": {
+                    "type": "integer",
+                    "example": 2010
+                }
+            }
+        },
+        "CarResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "mark": {
+                    "type": "string",
+                    "example": "Toyota"
+                },
+                "model": {
+                    "type": "string",
+                    "example": "Corolla"
+                },
+                "owner": {
+                    "$ref": "#/definitions/PersonResponse"
+                },
+                "regNum": {
+                    "type": "string",
+                    "example": "AA1234AA"
+                },
+                "year": {
+                    "type": "integer",
+                    "example": 2010
+                }
+            }
+        },
+        "Person": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "John"
+                },
+                "surname": {
+                    "type": "string",
+                    "example": "Doe"
+                }
+            }
+        },
+        "PersonResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "John"
+                },
+                "surname": {
+                    "type": "string",
+                    "example": "Doe"
+                }
+            }
+        }
+    }
+}
