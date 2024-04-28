@@ -1,8 +1,6 @@
 # Car API test task
 
 -   [Usage](#usage)
--   [Contributing](#contributing)
--   [License](#license)
 
 ## Usage
 
